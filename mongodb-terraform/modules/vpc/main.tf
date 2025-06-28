@@ -29,7 +29,7 @@ resource "aws_route_table" "public_rt" {
 
 
 
-# Security Groups (unchanged)
+# Security Groups 
 resource "aws_security_group" "bastion_sg" {
   vpc_id = aws_vpc.main.id
   ingress {
