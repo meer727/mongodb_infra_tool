@@ -1,0 +1,8 @@
+---
+mongodb_repo_gpgkey: "https://www.mongodb.org/static/pgp/server-{{ mongodb_version }}.asc"
+mongodb_repo: "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/{{ mongodb_version }} multiverse"
+mongodb_pkg: "mongodb-org"
+mongodb_server_pkg: "mongodb-org-server"
+mongodb_shell_pkg: "mongodb-org-shell"
+mongodb_user: "mongodb"
+mongodb_group: "mongodb"

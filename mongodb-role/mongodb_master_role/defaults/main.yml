@@ -1,0 +1,18 @@
+---
+# MongoDB version to install
+mongodb_version: "6.0"
+
+# MongoDB configuration
+mongodb_config:
+  port: 27017
+  bindIp: "0.0.0.0"
+  dbPath: "/var/lib/mongodb"
+  logPath: "/var/log/mongodb/mongod.log"
+  storageEngine: "wiredTiger"
+
+# Service management
+mongodb_service: mongod
+
+# User/Group settings
+mongodb_user: "mongod"
+mongodb_group: "mongod"

@@ -1,0 +1,75 @@
+---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
+  ignore_errors: yes
+
+- name: Add MongoDB repository key (Ubuntu)
+  ansible.builtin.apt_key:
+    url: "{{ mongodb_repo_gpgkey }}"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Add MongoDB repository (Ubuntu)
+  ansible.builtin.apt_repository:
+    repo: "{{ mongodb_repo }}"
+    state: present
+    filename: mongodb
+  when: ansible_distribution == "Ubuntu"
+
+- name: Add MongoDB repository (RedHat)
+  ansible.builtin.yum_repository:
+    name: mongodb-org-{{ mongodb_version }}
+    description: MongoDB Repository
+    baseurl: "{{ mongodb_repo_url }}"
+    gpgcheck: yes
+    gpgkey: "{{ mongodb_repo_gpgkey }}"
+    enabled: yes
+  when: ansible_distribution == "RedHat"
+
+- name: Install MongoDB packages (Ubuntu)
+  package:
+    name: 
+      - "{{ mongodb_pkg }}"
+      - "{{ mongodb_server_pkg }}"
+      - "{{ mongodb_shell_pkg }}"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install MongoDB packages (RedHat)
+  package:
+    name:
+      - "{{ mongodb_pkg }}"
+      - "{{ mongodb_server_pkg }}"
+    state: present
+  when: ansible_distribution == "RedHat"
+
+- name: Create MongoDB data directory
+  file:
+    path: "{{ mongodb_config.dbPath }}"
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    mode: '0755'
+
+- name: Create log directory
+  file:
+    path: "/var/log/mongodb"
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    mode: '0755'
+
+- name: Configure MongoDB
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: '0644'
+  #notify: restart mongodb
+
+- name: Ensure MongoDB is running and enabled
+  service:
+    name: "{{ mongodb_service }}"
+    state: started
+    enabled: yes

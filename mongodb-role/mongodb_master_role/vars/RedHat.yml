@@ -1,0 +1,5 @@
+---
+mongodb_repo_url: "https://repo.mongodb.org/yum/redhat/{{ ansible_distribution_major_version }}/mongodb-org/{{ mongodb_version }}/x86_64/"
+mongodb_repo_gpgkey: "https://www.mongodb.org/static/pgp/server-{{ mongodb_version }}.asc"
+mongodb_pkg: "mongodb-org"
+mongodb_server_pkg: "mongodb-org-server"

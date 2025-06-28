@@ -1,0 +1,7 @@
+- name: Configure MongoDB Standalone Server
+  hosts: _infra_server
+  become: true
+  tasks:
+    - name: Include MongoDB installation role
+      include_role:
+        name: mongodb_master_role

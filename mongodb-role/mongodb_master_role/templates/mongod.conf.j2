@@ -1,0 +1,23 @@
+# MongoDB Configuration File
+# Managed by Ansible - DO NOT EDIT MANUALLY
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: "{{ mongodb_config.logPath }}"
+  logRotate: reopen
+
+storage:
+  dbPath: "{{ mongodb_config.dbPath }}"
+  journal:
+    enabled: true
+  engine: "{{ mongodb_config.storageEngine }}"
+
+net:
+  port: {{ mongodb_config.port }}
+  bindIp: "{{ mongodb_config.bindIp }}"
+
+processManagement:
+  fork: false
+  pidFilePath: /var/run/mongodb/mongod.pid
+  timeZoneInfo: /usr/share/zoneinfo
