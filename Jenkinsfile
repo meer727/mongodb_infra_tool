@@ -46,8 +46,8 @@ pipeline {
             }
             steps {
                 echo "Cloning the repository..."
-                sh 'rm -rf testing_infra_role'
-                sh 'git clone --branch restore-june25 --single-branch https://github.com/meerali2/testing_infra_role.git'
+                sh 'rm -rf mongodb_infra_tool'
+                sh 'git clone https://github.com/meer727/mongodb_infra_tool.git'
             }
         }
 
