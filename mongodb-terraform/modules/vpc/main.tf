@@ -27,15 +27,7 @@ resource "aws_route_table" "public_rt" {
   }
 }
 
-# Output Public Route Table ID
-output "public_route_table_id" {
-  value = aws_route_table.public_rt.id
-}
 
-# Output Internet Gateway ID
-output "igw_id" {
-  value = aws_internet_gateway.igw.id
-}
 
 # Security Groups (unchanged)
 resource "aws_security_group" "bastion_sg" {
