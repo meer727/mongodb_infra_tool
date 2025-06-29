@@ -131,7 +131,7 @@ pipeline {
             }
         }
 
-        stage('Run Ansible Playbook via Bastion Host') {
+        stage('Run Ansible Playbook') {
             when {
                 expression { return env.INFRA_ACTION == 'Create' }
             }
